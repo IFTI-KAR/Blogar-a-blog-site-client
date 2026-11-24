@@ -1,88 +1,101 @@
+# Blogar
 
-# 📖 Blog Site
+**Full-Stack Blogging Platform — Client Application**
 
-A full-stack blogging platform where users can **browse blogs, read details, add new posts, update their own posts, and maintain a wishlist**.
-Built with **React (Vite)**, **Firebase Authentication**, **Node.js + Express**, and **MongoDB**.
+![React](https://img.shields.io/badge/React-19.1-61DAFB?style=flat-square&logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-7.0-646CFF?style=flat-square&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![Three.js](https://img.shields.io/badge/Three.js-0.178-000000?style=flat-square&logo=threedotjs&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-Hosting_%26_Auth-FFCA28?style=flat-square&logo=firebase&logoColor=black)
 
-🔗 **Live Demo:** [log-web-34782.web.app](https://log-web-34782.web.app/)
+Blogar is a modern React blogging frontend paired with a Node.js/Express/MongoDB backend—enabling readers to browse recent, trending, and featured articles, search or filter stories, save posts to a personal wishlist, and write, update, or discuss articles behind Firebase authentication.
 
-💻 **Client Repo:** [blog-site-client-side](https://github.com/IFTI-KAR/blog-site-client-side)
-
-🗄 **Server Repo:** [blog-server-side](https://github.com/IFTI-KAR/blog-server-side)
-
----
-
-## 🚀 Features
-
-* 🔐 **User Authentication** – Sign up, log in, and log out using Firebase Auth.
-* 📝 **Add Blogs** – Authenticated users can post new blogs with title, description, and category.
-* 📚 **View All Blogs** – Browse all blogs with pagination and filtering options.
-* ⭐ **Wishlist** – Save your favorite blogs for quick access.
-* 🔍 **Blog Details** – View detailed blog content (private route).
-* ✏ **Update Blog** – Edit your own blogs securely.
-* 📌 **Featured Blogs** – Highlighted popular blogs.
-* 🛡 **Protected Routes** – Only logged-in users can add blogs, view details, update, or access wishlist.
-* 📱 **Responsive Design** – Works seamlessly on mobile, tablet, and desktop.
+- **Live Website:** [https://log-web-34782.web.app/](https://log-web-34782.web.app/)
+- **Companion Server Repo:** [IFTI-KAR/blog-server-side](https://github.com/IFTI-KAR/blog-server-side)
 
 ---
 
-## 🛠 Tech Stack
+## Screenshots
 
-### **Frontend**
-
-* React (Vite)
-* React Router DOM
-* Firebase Authentication
-* Tailwind CSS
-* DaisyUI
-
-### **Backend**
-
-* Node.js
-* Express.js
-* MongoDB (Mongoose)
-* JWT Authentication
+| Editorial Home | Featured Blogs Table |
+| :---: | :---: |
+| ![Blogar Home](docs/screenshots/home.png) | ![Featured Blogs](docs/screenshots/featured.png) |
 
 ---
 
-## 📂 Folder Structure (Client)
+## Core Features
 
+- **Editorial Discovery Feed**: Home page featuring interactive hero motion (`three`, `postprocessing`, `motion`, `lottie-react`), recent stories (`RecentBlog`), trending tags (`TrendingTags`), feature highlights, and newsletter subscription.
+- **Featured Articles Table**: Powered by `@tanstack/react-table` for clean ranking and inspection of top stories.
+- **Full Blog CRUD (Authenticated)**: Protected routes (`PrivateRoute`) for publishing new blogs (`/add-blog`), editing authored posts (`/blogs/update/:id`), reading full blog details (`/blogs/:id`), and managing a saved wishlist (`/wishlist`).
+- **Category Filtering & Search**: Browse stories across `Allblogs` with category filters and instant feedback via `react-hot-toast`, `react-toastify`, and `sweetalert2`.
+
+---
+
+## Tech Stack
+
+| Category | Technologies |
+| :--- | :--- |
+| **Core UI** | React 19.1, Vite 7.0, React Router 7.6, Axios 1.10 |
+| **Styling & Motion** | Tailwind CSS 4.1, DaisyUI 5.0, Motion 12, Lottie React, Three.js + Postprocessing |
+| **Tables & UX** | TanStack Table 8.21, SweetAlert2, React Hot Toast, React Toastify, React Icons |
+| **Auth & Hosting** | Firebase Auth (`firebase` v11), Firebase Hosting (`firebase.json`) |
+
+---
+
+## Backend API Endpoints Consumed
+
+| Method | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/blogs` | Public | Fetch published blogs |
+| `GET` | `/blogs/:id` | Authenticated | Fetch single blog details |
+| `POST` | `/blogs` | Authenticated | Publish a new blog post |
+| `PATCH` | `/blogs/:id` | Authenticated | Update an authored blog post |
+| `DELETE` | `/blogs/:id` | Authenticated | Delete an authored blog post |
+| `GET` | `/wishlist` | Authenticated | Fetch saved user wishlist |
+| `POST` | `/wishlist` | Authenticated | Add an article to wishlist |
+
+---
+
+## Project Structure
+
+```text
+Blogar-a-blog-site-client/
+├── src/
+│   ├── assets/                          # Images & Lottie animations
+│   ├── context/
+│   │   ├── AuthContext/                 # Firebase auth state & token sync
+│   │   └── PrivsteRoute/                # Authenticated route guard
+│   ├── firebase/firebase.init.js
+│   ├── layouts/Rootlayout.jsx
+│   ├── pages/                           # Home, Allblogs, Featured, RecentBlog, TrendingTags, BlogDetails, Addblog, UpdateBlog, Wishlist, Faq, Login, Register
+│   └── router/router.jsx
+├── firebase.json
+└── package.json
 ```
-src/
- ├── context/
- │   └── PrivsteRoute/PrivateRoute.jsx  # Protects private pages
- ├── firebase/
- │   └── firebase.init.js               # Firebase config
- ├── layouts/
- │   └── Rootlayout.jsx                  # Main layout wrapper
- ├── pages/
- │   ├── Addblog/
- │   ├── Allblogs/
- │   ├── BlogDetails/
- │   ├── Faq/
- │   ├── FeatureCard/
- │   ├── Featured/
- │   ├── Home/                           # Banner, Newsletter, etc.
- │   ├── Login/
- │   ├── RecentBlog/
- │   ├── Register/
- │   ├── Shared/
- │   ├── Trending/
- │   ├── UpdateBlog/
- │   └── Wishlist/
- └── router/
-     └── router.jsx                      # All routes configuration
-```
 
 ---
 
-## 🔑 Environment Variables
+## Local Setup
 
-Create a `.env` file in both **client** and **server** folders.
+### Prerequisites
 
-### Client `.env`:
+- Node.js 18+
+- Companion backend ([blog-server-side](https://github.com/IFTI-KAR/blog-server-side)) or hosted API URL
 
+### Installation & Run
+
+```bash
+git clone https://github.com/IFTI-KAR/Blogar-a-blog-site-client.git
+cd Blogar-a-blog-site-client
+
+# Install dependencies
+npm install
 ```
+
+Create a `.env` file in the root directory:
+
+```env
 VITE_apiKey=your_firebase_api_key
 VITE_authDomain=your_project.firebaseapp.com
 VITE_projectId=your_project_id
@@ -92,81 +105,8 @@ VITE_appId=your_app_id
 VITE_SERVER_URL=http://localhost:5000
 ```
 
-### Server `.env`:
-
-```
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-```
-
----
-
-## ⚡ Installation & Setup
-
-### 1️⃣ Clone the repositories
+Start Vite:
 
 ```bash
-# Client
-git clone https://github.com/IFTI-KAR/blog-site-client-side.git
-cd blog-site-client-side
-npm install
-
-# Server
-git clone https://github.com/IFTI-KAR/blog-server-side.git
-cd blog-server-side
-npm install
-```
-
-### 2️⃣ Set up environment variables
-
-Add `.env` files to both **client** and **server** with the keys shown above.
-
-### 3️⃣ Run the development servers
-
-```bash
-# Run server
-cd blog-server-side
-npm run dev
-
-# Run client
-cd blog-site-client-side
 npm run dev
 ```
-
----
-
-## 🔒 Protected Routes
-
-The following routes require login:
-
-* `/add-blog`
-* `/blogs/:id` (Blog Details)
-* `/wishlist`
-* `/blogs/update/:id`
-
-These are wrapped with `PrivateRoute` to ensure only authenticated users can access them.
-
----
-
-## 📌 API Endpoints
-
-| Method | Endpoint     | Description            |
-| ------ | ------------ | ---------------------- |
-| GET    | `/blogs`     | Fetch all blogs        |
-| GET    | `/blogs/:id` | Get blog details       |
-| POST   | `/blogs`     | Add new blog (Auth)    |
-| PATCH  | `/blogs/:id` | Update blog (Auth)     |
-| DELETE | `/blogs/:id` | Delete blog (Auth)     |
-| GET    | `/wishlist`  | Get wishlist (Auth)    |
-| POST   | `/wishlist`  | Add to wishlist (Auth) |
-
----
-
-
----
-
-## 👨‍💻 Author
-
-**IFTIKAR RAHAMAN**
-Frontend Developer | MERN Stack Developer
